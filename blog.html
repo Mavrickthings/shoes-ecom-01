@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The SoleStore Journal – Sneaker Blog</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.blog-layout { display:grid; grid-template-columns:1fr 300px; gap:2rem; align-items:start; }
+.blog-main-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+.blog-sidebar .sw { background:var(--white); border:var(--border-thick); padding:1.5rem; margin-bottom:1.5rem; box-shadow:var(--shadow-sm); }
+.blog-sidebar .sw h4 { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:1rem; padding-bottom:0.75rem; border-bottom:var(--border); }
+.recent-item { display:flex; gap:10px; margin-bottom:1rem; padding-bottom:1rem; border-bottom:1px dashed #ddd; cursor:pointer; }
+.recent-item:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0; }
+.recent-thumb { width:60px; height:60px; object-fit:cover; border:var(--border); flex-shrink:0; }
+.recent-info a { font-size:13px; font-weight:700; color:var(--black); text-decoration:none; display:block; margin-bottom:2px; line-height:1.3; }
+.recent-info a:hover { color:var(--red); }
+.recent-info p { font-family:'Space Mono',monospace; font-size:11px; color:#666; }
+.cat-btns { display:flex; flex-wrap:wrap; gap:8px; }
+.cat-btn { background:var(--bg); border:var(--border); padding:6px 14px; font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:1px; cursor:pointer; text-transform:uppercase; transition:all 0.1s; }
+.cat-btn:hover, .cat-btn.active { background:var(--yellow); box-shadow:var(--shadow-sm); }
+@media(max-width:1024px){ .blog-layout{grid-template-columns:1fr;} .blog-main-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div id="cookie-banner"><p>🍪 We use cookies. See our <a href="cookie-consent.html">Cookie Policy</a>.</p><div class="ck-btns"><button class="ck-accept" onclick="acceptCookies()">ACCEPT</button><button class="ck-decline" onclick="declineCookies()">DECLINE</button></div></div>
+<nav><div class="nav-inner"><a href="index.html" class="nav-logo">SOLE<span>STORE</span></a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="shop.html">Shop</a></li><li><a href="about.html">About</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul><a href="cart.html" class="nav-cart">🛒 CART (<span class="cart-badge" style="display:none">0</span>)</a><button class="hamburger"><span></span><span></span><span></span></button></div></nav>
+
+<div class="page-hero"><div class="page-hero-inner"><div class="breadcrumb"><a href="index.html">Home</a> › Blog</div><h1>THE JOURNAL</h1><p>Sneaker guides, trend reports, care tips, and more.</p></div></div>
+
+<section class="section" style="padding:3rem 2rem;">
+  <div class="container">
+    <div class="blog-layout">
+      <div>
+        <div class="blog-main-grid" id="blog-grid"></div>
+      </div>
+      <aside class="blog-sidebar">
+        <div class="sw" style="background:var(--yellow);border-color:var(--black)">
+          <h4>🔥 NEW ARRIVALS</h4>
+          <p style="font-family:'Space Mono',monospace;font-size:12px;margin-bottom:1rem">Fresh styles just landed. Shop before they sell out.</p>
+          <a href="shop.html" class="btn btn-black btn-sm">SHOP NOW →</a>
+        </div>
+        <div class="sw">
+          <h4>FILTER BY TOPIC</h4>
+          <div class="cat-btns">
+            <button class="cat-btn active" onclick="filterBlog('all',this)">ALL</button>
+            <button class="cat-btn" onclick="filterBlog('Buying Guide',this)">BUYING</button>
+            <button class="cat-btn" onclick="filterBlog('Care & Maintenance',this)">CARE</button>
+            <button class="cat-btn" onclick="filterBlog('Trend Report',this)">TRENDS</button>
+            <button class="cat-btn" onclick="filterBlog('Style',this)">STYLE</button>
+            <button class="cat-btn" onclick="filterBlog('Review',this)">REVIEWS</button>
+          </div>
+        </div>
+        <div class="sw">
+          <h4>RECENT POSTS</h4>
+          <div id="recent-sidebar"></div>
+        </div>
+        <div class="sw" style="background:var(--black)">
+          <h4 style="color:var(--yellow)">💵 COD AVAILABLE</h4>
+          <p style="font-family:'Space Mono',monospace;font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:1rem">Shop with confidence. Pay when your order arrives.</p>
+          <a href="shop.html" class="btn btn-yellow btn-sm">SHOP NOW →</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand"><a href="index.html" class="footer-logo">SOLESTORE</a><p>Authentic sneakers. Based in Philadelphia, PA.</p></div>
+    <div class="footer-col"><h4>Shop</h4><ul><li><a href="shop.html">All Shoes</a></li></ul></div>
+    <div class="footer-col"><h4>Info</h4><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Legal</h4><ul><li><a href="privacy-policy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 SoleStore LLC. 1204 Market Street, Philadelphia, PA 19107</p></div>
+</footer>
+
+<div class="modal-overlay" id="contact-modal"><div class="modal"><button class="modal-close" onclick="closeModal()">✕</button><h3>QUICK QUESTION?</h3><form id="cf"><div class="form-group"><label>Email *</label><input type="email" required></div><div class="form-group"><label>Message</label><textarea></textarea></div><div class="consent-box"><input type="checkbox" id="cc" name="consent" required><label for="cc">I agree to the <a href="privacy-policy.html" target="_blank">Privacy Policy</a>. *</label></div><button type="submit" class="btn btn-yellow btn-full">SEND →</button></form><div class="success-msg" id="cs">✓ SENT!</div></div></div>
+<script src="js/main.js"></script>
+<script>
+handleFormSubmit('cf','cs');
+let currentCat = 'all';
+
+function renderBlog() {
+  const grid = document.getElementById('blog-grid');
+  const recent = document.getElementById('recent-sidebar');
+  let all = getAllBlogs();
+  let filtered = currentCat === 'all' ? all : all.filter(b => b.category === currentCat);
+
+  grid.innerHTML = filtered.map(b => `
+    <div class="blog-card reveal" onclick="window.location='blog-post.html?id=${b.id}'">
+      <div class="blog-card-img"><img src="${b.image||'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=70'}" alt="${b.title}" loading="lazy"></div>
+      <div class="blog-card-body">
+        <span class="blog-cat">${b.category||'General'}</span>
+        <h3>${b.title}</h3>
+        <p>${b.excerpt.substring(0,120)}...</p>
+        <div class="blog-meta">${b.date} · ${b.author}</div>
+      </div>
+    </div>`).join('');
+  initScrollReveal();
+
+  recent.innerHTML = all.slice(0,4).map(b => `
+    <div class="recent-item" onclick="window.location='blog-post.html?id=${b.id}'">
+      <img class="recent-thumb" src="${b.image||'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=120&q=60'}" alt="${b.title}">
+      <div class="recent-info"><a href="blog-post.html?id=${b.id}">${b.title.substring(0,55)}...</a><p>${b.date}</p></div>
+    </div>`).join('');
+}
+
+function filterBlog(cat, el) {
+  currentCat = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  renderBlog();
+}
+renderBlog();
+</script>
+</body>
+</html>

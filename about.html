@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us – SoleStore</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:0; border:var(--border-thick); margin-bottom:0; }
+.about-img-panel { overflow:hidden; min-height:500px; }
+.about-img-panel img { width:100%; height:100%; object-fit:cover; }
+.about-text-panel { padding:3rem; border-left:var(--border-thick); display:flex; flex-direction:column; justify-content:center; }
+.about-text-panel h2 { font-family:'Bebas Neue',sans-serif; font-size:3rem; letter-spacing:3px; margin-bottom:1rem; }
+.about-text-panel p { font-family:'Space Mono',monospace; font-size:13px; color:#333; line-height:1.8; margin-bottom:1rem; }
+.values-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:var(--border-thick); }
+.value-card { background:var(--white); border-right:var(--border-thick); padding:2rem; }
+.value-card:last-child { border-right:none; }
+.value-card:hover { background:var(--yellow); }
+.value-icon { font-size:2.5rem; margin-bottom:0.75rem; display:block; }
+.value-card h3 { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:2px; margin-bottom:0.5rem; }
+.value-card p { font-family:'Space Mono',monospace; font-size:12px; color:#333; line-height:1.7; }
+.stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:0; background:var(--black); border:var(--border-thick); }
+.stat-box { padding:2.5rem 2rem; text-align:center; border-right:2px solid rgba(255,255,255,0.1); }
+.stat-box:last-child { border-right:none; }
+.stat-box .n { font-family:'Bebas Neue',sans-serif; font-size:3.5rem; color:var(--yellow); display:block; letter-spacing:2px; }
+.stat-box .l { font-family:'Space Mono',monospace; font-size:11px; color:rgba(255,255,255,0.5); text-transform:uppercase; letter-spacing:2px; }
+@media(max-width:1024px){ .about-grid{grid-template-columns:1fr;} .about-img-panel{min-height:300px;} .about-text-panel{border-left:none;border-top:var(--border-thick);} .values-grid{grid-template-columns:1fr;} .value-card{border-right:none;border-bottom:var(--border-thick);} .stats-row{grid-template-columns:repeat(2,1fr);} }
+</style>
+</head>
+<body>
+<div id="cookie-banner"><p>🍪 We use cookies. See our <a href="cookie-consent.html">Cookie Policy</a>.</p><div class="ck-btns"><button class="ck-accept" onclick="acceptCookies()">ACCEPT</button><button class="ck-decline" onclick="declineCookies()">DECLINE</button></div></div>
+<nav><div class="nav-inner"><a href="index.html" class="nav-logo">SOLE<span>STORE</span></a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="shop.html">Shop</a></li><li><a href="about.html">About</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul><a href="cart.html" class="nav-cart">🛒 CART (<span class="cart-badge" style="display:none">0</span>)</a><button class="hamburger"><span></span><span></span><span></span></button></div></nav>
+
+<div class="page-hero"><div class="page-hero-inner"><div class="breadcrumb"><a href="index.html">Home</a> › About</div><h1>ABOUT US</h1><p>We don't just sell shoes. We sell the right shoes.</p></div></div>
+
+<section class="section" style="padding:4rem 2rem;">
+  <div class="container">
+    <div class="about-grid reveal">
+      <div class="about-img-panel"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80" alt="Shoes"></div>
+      <div class="about-text-panel">
+        <span class="section-label">OUR STORY</span>
+        <h2>BUILT FOR PEOPLE WHO TAKE SHOES SERIOUSLY</h2>
+        <p>SoleStore was founded in 2018 in Philadelphia, PA, by a group of sneaker obsessives who were tired of paying markup prices for inferior products. We set out to build something different: a curated, honest, no-nonsense shoe store that treats customers like adults.</p>
+        <p>We stock only authentic products — verified before they ever reach your door. Every pair we carry has been selected by people who actually wear and care about footwear, not buyers chasing trending keywords.</p>
+        <p>Our Cash on Delivery option was one of our first big decisions. We believe you shouldn't have to hand over your card details online for something as personal as shoes. Pay when it's in your hands. That's how it should be.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:0 2rem 4rem">
+  <div class="container">
+    <div class="stats-row reveal">
+      <div class="stat-box"><span class="n">2018</span><span class="l">Founded</span></div>
+      <div class="stat-box"><span class="n">12K+</span><span class="l">Happy Customers</span></div>
+      <div class="stat-box"><span class="n">100%</span><span class="l">Authentic Products</span></div>
+      <div class="stat-box"><span class="n">COD</span><span class="l">Pay on Delivery</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding:0 2rem 4rem">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:2rem"><span class="section-label">WHAT WE STAND FOR</span><h2 class="section-title">OUR VALUES</h2></div>
+    <div class="values-grid">
+      <div class="value-card reveal"><span class="value-icon">✅</span><h3>AUTHENTICITY</h3><p>Every product we sell is verified genuine. If it's not authentic, it doesn't come through our doors — ever.</p></div>
+      <div class="value-card reveal"><span class="value-icon">💵</span><h3>FAIR PRICING</h3><p>No inflated markups. We keep our margins fair and prices transparent. You know exactly what you're paying for.</p></div>
+      <div class="value-card reveal"><span class="value-icon">🚚</span><h3>FAST DELIVERY</h3><p>Orders ship within 24 hours. US-wide delivery in 3–5 business days. Track your order every step of the way.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding:0 2rem 4rem">
+  <div class="container">
+    <div class="about-grid reveal" style="margin-bottom:0">
+      <div class="about-text-panel" style="border-left:none;border-right:var(--border-thick)">
+        <span class="section-label">CASH ON DELIVERY</span>
+        <h2>PAY WHEN IT ARRIVES</h2>
+        <p>We introduced Cash on Delivery because we think it's the most honest way to buy online. You don't pay until your shoes are physically in your hands. No trust issues. No card fraud risk. Just a straightforward exchange: shoes arrive, you pay.</p>
+        <p>COD is available on all US domestic orders. Simply select it at checkout and have the exact amount ready for the delivery driver. It's that simple.</p>
+      </div>
+      <div class="about-img-panel"><img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=800&q=80" alt="Delivery"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand"><a href="index.html" class="footer-logo">SOLESTORE</a><p>Authentic sneakers. Cash on delivery. Based in Philadelphia, PA.</p></div>
+    <div class="footer-col"><h4>Shop</h4><ul><li><a href="shop.html">All Shoes</a></li><li><a href="cart.html">Cart</a></li></ul></div>
+    <div class="footer-col"><h4>Info</h4><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+    <div class="footer-col"><h4>Legal</h4><ul><li><a href="privacy-policy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="cookie-consent.html">Cookies</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 SoleStore LLC. 1204 Market Street, Suite 800, Philadelphia, PA 19107</p></div>
+</footer>
+<div class="modal-overlay" id="contact-modal"><div class="modal"><button class="modal-close" onclick="closeModal()">✕</button><h3>CONTACT US</h3><form id="cf"><div class="form-group"><label>Email *</label><input type="email" required></div><div class="form-group"><label>Message *</label><textarea required></textarea></div><div class="consent-box"><input type="checkbox" id="cc" name="consent" required><label for="cc">I agree to the <a href="privacy-policy.html" target="_blank">Privacy Policy</a>. *</label></div><button type="submit" class="btn btn-yellow btn-full">SEND →</button></form><div class="success-msg" id="cs">✓ MESSAGE SENT!</div></div></div>
+<script src="js/main.js"></script><script>handleFormSubmit('cf','cs');</script>
+</body>
+</html>

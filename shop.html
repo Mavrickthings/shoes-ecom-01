@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop All Shoes – SoleStore</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.shop-layout { display: grid; grid-template-columns: 260px 1fr; gap: 0; border: var(--border-thick); }
+.shop-sidebar { border-right: var(--border-thick); background: var(--white); }
+.sidebar-section { padding: 1.5rem; border-bottom: var(--border); }
+.sidebar-section:last-child { border-bottom: none; }
+.sidebar-section h4 { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem; }
+.filter-btn { display: block; width: 100%; text-align: left; background: none; border: 2px solid transparent; padding: 8px 12px; font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; margin-bottom: 4px; transition: all 0.1s; }
+.filter-btn:hover { background: var(--yellow); border-color: var(--black); }
+.filter-btn.active { background: var(--black); color: var(--white); }
+.sort-select { width: 100%; padding: 10px 12px; border: var(--border); font-family: 'Space Mono', monospace; font-size: 13px; background: var(--white); box-shadow: var(--shadow-sm); }
+.shop-main { background: var(--bg); }
+.shop-header { background: var(--black); padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; border-bottom: var(--border-thick); }
+.shop-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--white); letter-spacing: 3px; }
+.shop-header p { color: rgba(255,255,255,0.55); font-family: 'Space Mono', monospace; font-size: 13px; }
+.shop-products { padding: 2rem; }
+.no-results { text-align: center; padding: 4rem 2rem; font-family: 'Space Mono', monospace; color: #666; }
+.no-results h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--black); letter-spacing: 2px; }
+.price-range { display: flex; gap: 8px; }
+.price-range input { width: 70px; padding: 8px; border: var(--border); font-family: 'Space Mono', monospace; font-size: 12px; }
+@media (max-width: 768px) { .shop-layout { grid-template-columns: 1fr; } .shop-sidebar { border-right: none; border-bottom: var(--border-thick); } }
+</style>
+</head>
+<body>
+<div id="cookie-banner"><p>🍪 We use cookies. See our <a href="cookie-consent.html">Cookie Policy</a> and <a href="privacy-policy.html">Privacy Policy</a>.</p><div class="ck-btns"><button class="ck-accept" onclick="acceptCookies()">ACCEPT</button><button class="ck-decline" onclick="declineCookies()">DECLINE</button></div></div>
+<nav><div class="nav-inner"><a href="index.html" class="nav-logo">SOLE<span>STORE</span></a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="shop.html">Shop</a></li><li><a href="about.html">About</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul><a href="cart.html" class="nav-cart">🛒 CART (<span class="cart-badge" style="display:none">0</span>)</a><button class="hamburger"><span></span><span></span><span></span></button></div></nav>
+
+<div class="page-hero" style="padding:7rem 2rem 3rem">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> › Shop</div>
+    <h1>ALL SHOES</h1>
+    <p style="color:rgba(255,255,255,0.6);font-family:'Space Mono',monospace;font-size:13px">12 styles — something for every stride.</p>
+  </div>
+</div>
+
+<section class="section" style="padding:3rem 2rem;">
+  <div class="container">
+    <div class="shop-layout">
+      <div class="shop-sidebar">
+        <div class="sidebar-section">
+          <h4>Category</h4>
+          <button class="filter-btn active" onclick="applyFilter('all',this)">All Shoes</button>
+          <button class="filter-btn" onclick="applyFilter('running',this)">Running</button>
+          <button class="filter-btn" onclick="applyFilter('lifestyle',this)">Lifestyle</button>
+          <button class="filter-btn" onclick="applyFilter('casual',this)">Casual</button>
+          <button class="filter-btn" onclick="applyFilter('trail',this)">Trail</button>
+          <button class="filter-btn" onclick="applyFilter('sport',this)">Sport</button>
+        </div>
+        <div class="sidebar-section">
+          <h4>Brand</h4>
+          <button class="filter-btn" onclick="applyBrand('Nike',this)">Nike</button>
+          <button class="filter-btn" onclick="applyBrand('Adidas',this)">Adidas</button>
+          <button class="filter-btn" onclick="applyBrand('New Balance',this)">New Balance</button>
+          <button class="filter-btn" onclick="applyBrand('Jordan',this)">Jordan</button>
+          <button class="filter-btn" onclick="applyBrand('Puma',this)">Puma</button>
+          <button class="filter-btn" onclick="applyBrand('Converse',this)">Converse</button>
+          <button class="filter-btn" onclick="applyBrand('Vans',this)">Vans</button>
+        </div>
+        <div class="sidebar-section">
+          <h4>Sort By</h4>
+          <select class="sort-select" onchange="applySort(this.value)">
+            <option value="default">Default</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+          </select>
+        </div>
+        <div class="sidebar-section">
+          <h4>Deals</h4>
+          <button class="filter-btn" onclick="applyFilter('sale',this)">On Sale</button>
+          <button class="filter-btn" onclick="applyFilter('new',this)">New Arrivals</button>
+        </div>
+        <div class="sidebar-section" style="background:var(--yellow);border:none">
+          <h4 style="color:var(--black)">💵 COD Available</h4>
+          <p style="font-size:12px;font-family:'Space Mono',monospace;color:var(--black)">Pay cash when your order arrives. No card needed.</p>
+        </div>
+      </div>
+      <div class="shop-main">
+        <div class="shop-header">
+          <div><h2 id="cat-title">ALL SHOES</h2><p id="cat-count">12 products</p></div>
+        </div>
+        <div class="shop-products">
+          <div class="products-grid" id="shop-grid"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand"><a href="index.html" class="footer-logo">SOLESTORE</a><p>Authentic sneakers with fast US shipping and COD payment options.</p></div>
+    <div class="footer-col"><h4>Shop</h4><ul><li><a href="shop.html">All Shoes</a></li><li><a href="shop.html?cat=running">Running</a></li><li><a href="shop.html?cat=lifestyle">Lifestyle</a></li></ul></div>
+    <div class="footer-col"><h4>Info</h4><ul><li><a href="about.html">About</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Legal</h4><ul><li><a href="privacy-policy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="cookie-consent.html">Cookies</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 SoleStore LLC. 1204 Market Street, Suite 800, Philadelphia, PA 19107</p></div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+let currentFilter = 'all', currentBrand = null, currentSort = 'default';
+
+function render() {
+  let products = [...PRODUCTS];
+  if (currentFilter === 'sale') products = products.filter(p => p.badge === 'sale');
+  else if (currentFilter === 'new') products = products.filter(p => p.badge === 'new');
+  else if (currentFilter !== 'all') products = products.filter(p => p.category === currentFilter);
+  if (currentBrand) products = products.filter(p => p.brand === currentBrand);
+  if (currentSort === 'price-asc') products.sort((a,b) => a.price-b.price);
+  if (currentSort === 'price-desc') products.sort((a,b) => b.price-a.price);
+
+  const grid = document.getElementById('shop-grid');
+  document.getElementById('cat-count').textContent = products.length + ' products';
+  if (products.length === 0) {
+    grid.innerHTML = '<div class="no-results"><h3>NO RESULTS</h3><p>Try a different filter.</p></div>';
+    return;
+  }
+  grid.innerHTML = products.map(p => buildProductCard(p)).join('');
+  initScrollReveal();
+}
+
+function applyFilter(f, el) {
+  currentFilter = f; currentBrand = null;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if(el) el.classList.add('active');
+  document.getElementById('cat-title').textContent = f.toUpperCase().replace('-',' ');
+  render();
+}
+function applyBrand(b, el) {
+  currentBrand = currentBrand === b ? null : b;
+  document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+  if(currentBrand && el) el.classList.add('active');
+  render();
+}
+function applySort(s) { currentSort = s; render(); }
+
+// Check URL params
+const urlCat = new URLSearchParams(window.location.search).get('cat');
+const urlFilter = new URLSearchParams(window.location.search).get('filter');
+if(urlCat) currentFilter = urlCat;
+if(urlFilter) currentFilter = urlFilter;
+render();
+</script>
+</body>
+</html>

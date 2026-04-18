@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Cookie Policy – SoleStore</title><link rel="stylesheet" href="css/style.css">
+<style>
+.ck-table { width:100%; border-collapse:collapse; margin:1.5rem 0; border:var(--border); }
+.ck-table th { background:var(--black); color:var(--yellow); padding:10px 14px; text-align:left; font-family:'Space Mono',monospace; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; }
+.ck-table td { padding:10px 14px; border-bottom:var(--border); font-family:'Space Mono',monospace; font-size:13px; color:#333; }
+.ck-table tr:last-child td { border-bottom:none; }
+.pref-box { background:var(--white); border:var(--border-thick); padding:2rem; margin:1.5rem 0; box-shadow:var(--shadow); }
+.pref-box h3 { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:2px; margin-bottom:1.5rem; }
+.tog-row { display:flex; justify-content:space-between; align-items:center; padding:1rem 0; border-bottom:var(--border); gap:1rem; }
+.tog-row:last-of-type { border-bottom:none; }
+.ti strong { font-size:14px; font-weight:700; display:block; margin-bottom:3px; }
+.ti p { font-family:'Space Mono',monospace; font-size:12px; color:#555; max-width:400px; }
+.tog { position:relative; width:52px; height:28px; flex-shrink:0; }
+.tog input { display:none; }
+.tog-s { position:absolute; inset:0; background:#ccc; border:var(--border); cursor:pointer; transition:0.25s; }
+.tog input:checked + .tog-s { background:var(--yellow); }
+.tog-s::before { content:''; position:absolute; width:20px; height:20px; left:2px; top:50%; transform:translateY(-50%); background:var(--black); transition:0.25s; }
+.tog input:checked + .tog-s::before { transform:translateY(-50%) translateX(24px); }
+.tog input:disabled + .tog-s { opacity:0.5; cursor:not-allowed; }
+.saved-msg { display:none; background:var(--lime); border:var(--border); padding:0.75rem 1rem; font-family:'Space Mono',monospace; font-weight:700; font-size:13px; margin-top:1rem; }
+</style>
+</head>
+<body>
+<div id="cookie-banner"><p>🍪 We use cookies. See our <a href="cookie-consent.html">Cookie Policy</a>.</p><div class="ck-btns"><button class="ck-accept" onclick="acceptCookies()">ACCEPT</button><button class="ck-decline" onclick="declineCookies()">DECLINE</button></div></div>
+<nav><div class="nav-inner"><a href="index.html" class="nav-logo">SOLE<span>STORE</span></a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="shop.html">Shop</a></li><li><a href="about.html">About</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul><a href="cart.html" class="nav-cart">🛒 CART (<span class="cart-badge" style="display:none">0</span>)</a><button class="hamburger"><span></span><span></span><span></span></button></div></nav>
+<div class="page-hero"><div class="page-hero-inner"><div class="breadcrumb"><a href="index.html">Home</a> › Cookie Policy</div><h1>COOKIE POLICY</h1></div></div>
+<div class="legal-body">
+  <span class="legal-date">Last updated: January 1, 2025</span>
+  <h2>WHAT ARE COOKIES?</h2>
+  <p>Cookies are small text files stored on your device when you visit a website. They help websites function properly, remember your preferences, and provide analytics data to site owners.</p>
+  <h2>HOW WE USE COOKIES</h2>
+  <p>SoleStore uses cookies to maintain your shopping cart, remember your consent preferences, store blog posts for our admin system, and analyze how visitors use our site.</p>
+  <h2>COOKIES WE USE</h2>
+  <table class="ck-table">
+    <tr><th>Name</th><th>Type</th><th>Purpose</th><th>Duration</th></tr>
+    <tr><td>ss_cookie</td><td>Essential</td><td>Stores your cookie consent choice</td><td>1 year</td></tr>
+    <tr><td>ss_cart</td><td>Functional</td><td>Maintains your shopping cart contents</td><td>Session</td></tr>
+    <tr><td>ss_blogs</td><td>Functional</td><td>Blog admin system (localStorage)</td><td>Persistent</td></tr>
+    <tr><td>_ga, _gid</td><td>Analytics</td><td>Google Analytics — visitor behavior tracking</td><td>2 years / 24 hrs</td></tr>
+  </table>
+  <h2>MANAGE YOUR PREFERENCES</h2>
+  <div class="pref-box">
+    <h3>COOKIE SETTINGS</h3>
+    <div class="tog-row"><div class="ti"><strong>Essential Cookies</strong><p>Required for the website and cart to function. Cannot be disabled.</p></div><label class="tog"><input type="checkbox" checked disabled><span class="tog-s"></span></label></div>
+    <div class="tog-row"><div class="ti"><strong>Functional Cookies</strong><p>Powers your shopping cart and admin features.</p></div><label class="tog"><input type="checkbox" id="func" checked><span class="tog-s"></span></label></div>
+    <div class="tog-row"><div class="ti"><strong>Analytics Cookies</strong><p>Helps us understand how shoppers use our site.</p></div><label class="tog"><input type="checkbox" id="analy"><span class="tog-s"></span></label></div>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem">
+      <button class="btn btn-yellow" onclick="savePrefs()">SAVE PREFERENCES</button>
+      <button class="btn btn-black" onclick="acceptAllPrefs()">ACCEPT ALL</button>
+    </div>
+    <div class="saved-msg" id="saved-msg">✓ PREFERENCES SAVED.</div>
+  </div>
+  <h2>BROWSER CONTROLS</h2>
+  <p>You can also manage cookies through your browser settings. Note that disabling cookies may affect cart functionality. For guidance, visit <a href="https://www.aboutcookies.org" target="_blank">aboutcookies.org</a>.</p>
+  <h2>CONTACT</h2>
+  <ul><li>✉️ <a href="mailto:help@solestore.site">help@solestore.site</a></li><li>📍 1204 Market Street, Suite 800, Philadelphia, PA 19107</li></ul>
+</div>
+<footer><div class="footer-top"><div class="footer-brand"><a href="../index.html" class="footer-logo">SOLESTORE</a><p>Authentic sneakers. Philadelphia, PA.</p></div><div class="footer-col"><h4>Shop</h4><ul><li><a href="../shop.html">All Shoes</a></li></ul></div><div class="footer-col"><h4>Legal</h4><ul><li><a href="privacy-policy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="cookie-consent.html">Cookies</a></li></ul></div><div class="footer-col"><h4>Contact</h4><p>✉️ help@solestore.site</p></div></div><div class="footer-bottom"><p>© 2025 SoleStore LLC. All rights reserved.</p></div></footer>
+<script src="../js/main.js"></script>
+<script>
+function savePrefs() {
+  localStorage.setItem('ss_cookie','custom');
+  localStorage.setItem('ss_analytics', document.getElementById('analy').checked ? 'yes' : 'no');
+  const s = document.getElementById('saved-msg'); s.style.display='block';
+  setTimeout(()=>s.style.display='none',3000);
+}
+function acceptAllPrefs() {
+  document.getElementById('func').checked=true;
+  document.getElementById('analy').checked=true;
+  acceptCookies();
+  const s = document.getElementById('saved-msg'); s.style.display='block';
+  setTimeout(()=>s.style.display='none',3000);
+}
+</script>
+</body></html>

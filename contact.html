@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us – SoleStore</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:0; border:var(--border-thick); }
+.contact-form-panel { padding:3rem; border-right:var(--border-thick); background:var(--white); }
+.contact-info-panel { padding:3rem; background:var(--black); }
+.contact-info-panel h2 { font-family:'Bebas Neue',sans-serif; font-size:2rem; color:var(--yellow); letter-spacing:3px; margin-bottom:2rem; }
+.ci-item { display:flex; gap:14px; align-items:flex-start; margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid rgba(255,255,255,0.1); }
+.ci-item:last-child { border-bottom:none; }
+.ci-icon { width:44px; height:44px; background:var(--yellow); border:2px solid rgba(255,255,255,0.3); display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0; }
+.ci-label { font-family:'Space Mono',monospace; font-size:10px; font-weight:700; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:2px; margin-bottom:4px; }
+.ci-value { font-weight:600; font-size:14px; color:var(--white); font-family:'Space Mono',monospace; }
+.ci-value a { color:var(--yellow); text-decoration:none; }
+.contact-form-panel h2 { font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:3px; margin-bottom:0.25rem; }
+.contact-form-panel p { font-family:'Space Mono',monospace; font-size:12px; color:#555; margin-bottom:2rem; }
+@media(max-width:768px){ .contact-grid{grid-template-columns:1fr;} .contact-form-panel{border-right:none;border-bottom:var(--border-thick);} }
+</style>
+</head>
+<body>
+<div id="cookie-banner"><p>🍪 We use cookies. See our <a href="cookie-consent.html">Cookie Policy</a>.</p><div class="ck-btns"><button class="ck-accept" onclick="acceptCookies()">ACCEPT</button><button class="ck-decline" onclick="declineCookies()">DECLINE</button></div></div>
+<nav><div class="nav-inner"><a href="index.html" class="nav-logo">SOLE<span>STORE</span></a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="shop.html">Shop</a></li><li><a href="about.html">About</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul><a href="cart.html" class="nav-cart">🛒 CART (<span class="cart-badge" style="display:none">0</span>)</a><button class="hamburger"><span></span><span></span><span></span></button></div></nav>
+
+<div class="page-hero"><div class="page-hero-inner"><div class="breadcrumb"><a href="index.html">Home</a> › Contact</div><h1>CONTACT US</h1><p>Questions, orders, returns — we're here for all of it.</p></div></div>
+
+<section class="section" style="padding:3rem 2rem;">
+  <div class="container">
+    <div class="contact-grid reveal">
+      <div class="contact-form-panel">
+        <h2>SEND A MESSAGE</h2>
+        <p>We respond within 24 hours on business days (Mon–Fri). For order issues, please include your order number.</p>
+        <form id="contact-form">
+          <div class="form-row">
+            <div class="form-group"><label>First Name *</label><input type="text" required></div>
+            <div class="form-group"><label>Last Name *</label><input type="text" required></div>
+          </div>
+          <div class="form-group"><label>Email Address *</label><input type="email" required placeholder="you@example.com"></div>
+          <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="(555) 000-0000"></div>
+          <div class="form-group"><label>Subject</label>
+            <select><option>General Enquiry</option><option>Order Status / Tracking</option><option>Returns & Exchanges</option><option>Size Help</option><option>Product Availability</option><option>Cash on Delivery Query</option><option>Other</option></select>
+          </div>
+          <div class="form-group"><label>Your Message *</label><textarea placeholder="Tell us what's on your mind..." required></textarea></div>
+          <div class="consent-box">
+            <input type="checkbox" id="cc" name="consent" required>
+            <label for="cc">I agree to the <a href="privacy-policy.html" target="_blank">Privacy Policy</a> and <a href="terms.html" target="_blank">Terms & Conditions</a>. I consent to SoleStore contacting me about this enquiry. *</label>
+          </div>
+          <button type="submit" class="btn btn-yellow btn-full">SEND MESSAGE →</button>
+        </form>
+        <div class="success-msg" id="cs">✓ MESSAGE RECEIVED! We'll reply within 24 hours.</div>
+      </div>
+      <div class="contact-info-panel">
+        <h2>GET IN TOUCH</h2>
+        <div class="ci-item">
+          <div class="ci-icon">✉️</div>
+          <div><div class="ci-label">Customer Support</div><div class="ci-value"><a href="mailto:help@solestore.site">help@solestore.site</a></div></div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">📦</div>
+          <div><div class="ci-label">Orders & Returns</div><div class="ci-value"><a href="mailto:orders@solestore.site">orders@solestore.site</a></div></div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">📍</div>
+          <div><div class="ci-label">Headquarters</div><div class="ci-value">1204 Market Street, Suite 800<br>Philadelphia, PA 19107<br>United States</div></div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">🕐</div>
+          <div><div class="ci-label">Business Hours</div><div class="ci-value">Mon–Fri: 9am – 6pm EST<br>Sat: 10am – 4pm EST<br>Sun: Closed</div></div>
+        </div>
+        <div style="background:var(--yellow);border:var(--border);padding:1.25rem;margin-top:1.5rem;box-shadow:var(--shadow-sm)">
+          <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;margin-bottom:0.5rem;color:var(--black)">💵 CASH ON DELIVERY QUESTIONS?</h3>
+          <p style="font-family:'Space Mono',monospace;font-size:12px;color:var(--black)">COD is available on all US orders. Select it at checkout — no card needed. Have exact cash ready for the driver. Questions? Email <a href="mailto:help@solestore.site" style="color:var(--black);font-weight:700">help@solestore.site</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand"><a href="index.html" class="footer-logo">SOLESTORE</a><p>Authentic sneakers. Cash on delivery. Based in Philadelphia, PA.</p></div>
+    <div class="footer-col"><h4>Shop</h4><ul><li><a href="shop.html">All Shoes</a></li><li><a href="cart.html">Cart</a></li></ul></div>
+    <div class="footer-col"><h4>Info</h4><ul><li><a href="about.html">About</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+    <div class="footer-col"><h4>Legal</h4><ul><li><a href="privacy-policy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="cookie-consent.html">Cookies</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 SoleStore LLC. 1204 Market Street, Suite 800, Philadelphia, PA 19107 | help@solestore.site</p></div>
+</footer>
+<div class="modal-overlay" id="contact-modal"><div class="modal"><button class="modal-close" onclick="closeModal()">✕</button><h3>QUICK QUESTION</h3><form id="qf"><div class="form-group"><label>Email *</label><input type="email" required></div><div class="form-group"><label>Message *</label><textarea required></textarea></div><div class="consent-box"><input type="checkbox" id="qc" name="consent" required><label for="qc">I agree to the <a href="privacy-policy.html" target="_blank">Privacy Policy</a>. *</label></div><button type="submit" class="btn btn-yellow btn-full">SEND →</button></form><div class="success-msg" id="qs">✓ SENT!</div></div></div>
+<script src="js/main.js"></script><script>handleFormSubmit('contact-form','cs');handleFormSubmit('qf','qs');</script>
+</body>
+</html>

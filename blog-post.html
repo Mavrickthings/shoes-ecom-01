@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Blog Post – SoleStore</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.post-layout { display:grid; grid-template-columns:1fr 300px; gap:2rem; align-items:start; }
+.post-hero-img { width:100%; max-height:480px; object-fit:cover; border:var(--border-thick); box-shadow:var(--shadow-lg); margin-bottom:2rem; display:block; }
+.post-cat-tag { display:inline-block; background:var(--yellow); border:var(--border); padding:4px 14px; font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:0.75rem; box-shadow:var(--shadow-sm); }
+.post-title { font-family:'Bebas Neue',sans-serif; font-size:3rem; letter-spacing:3px; color:var(--black); line-height:1.05; margin-bottom:1rem; }
+.post-meta { display:flex; gap:1.5rem; flex-wrap:wrap; padding:1rem 1.25rem; background:var(--black); border:var(--border-thick); margin-bottom:2rem; font-family:'Space Mono',monospace; font-size:12px; color:rgba(255,255,255,0.65); box-shadow:var(--shadow-sm); }
+.post-meta strong { color:var(--yellow); }
+.post-content { font-family:'Space Mono',monospace; font-size:14px; color:#222; line-height:1.85; }
+.post-content p { margin-bottom:1.25rem; }
+.post-content h2 { font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:2px; color:var(--black); margin:2.5rem 0 0.75rem; border-left:5px solid var(--yellow); padding-left:1rem; }
+.post-content h3 { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:1px; color:var(--black); margin:1.5rem 0 0.5rem; }
+.post-content ul, .post-content ol { padding-left:1.5rem; margin-bottom:1.25rem; }
+.post-content li { margin-bottom:0.4rem; }
+.post-content strong { font-weight:700; color:var(--black); }
+.sidebar .sw { background:var(--white); border:var(--border-thick); padding:1.5rem; margin-bottom:1.5rem; box-shadow:var(--shadow-sm); }
+.sidebar .sw h4 { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:1rem; padding-bottom:0.75rem; border-bottom:var(--border); }
+.related-post { display:flex; gap:10px; margin-bottom:1rem; padding-bottom:1rem; border-bottom:1px dashed #ddd; cursor:pointer; }
+.related-post:last-child { border-bottom:none; }
+.related-thumb { width:60px; height:60px; object-fit:cover; border:var(--border); flex-shrink:0; }
+.related-info a { font-size:13px; font-weight:700; color:var(--black); text-decoration:none; display:block; margin-bottom:2px; }
+.related-info a:hover { color:var(--red); }
+.related-info p { font-family:'Space Mono',monospace; font-size:11px; color:#666; }
+.back-link { display:inline-flex; align-items:center; gap:6px; font-family:'Space Mono',monospace; font-size:12px; font-weight:700; color:var(--black); text-decoration:none; background:var(--yellow); border:var(--border); padding:8px 16px; margin-bottom:1.5rem; box-shadow:var(--shadow-sm); }
+.back-link:hover { box-shadow:5px 5px 0 var(--black); transform:translate(-2px,-2px); }
+@media(max-width:1024px){ .post-layout{grid-template-columns:1fr;} .sidebar{display:none;} }
+</style>
+</head>
+<body>
+<div id="cookie-banner"><p>🍪 We use cookies. See our <a href="cookie-consent.html">Cookie Policy</a>.</p><div class="ck-btns"><button class="ck-accept" onclick="acceptCookies()">ACCEPT</button><button class="ck-decline" onclick="declineCookies()">DECLINE</button></div></div>
+<nav><div class="nav-inner"><a href="index.html" class="nav-logo">SOLE<span>STORE</span></a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="shop.html">Shop</a></li><li><a href="about.html">About</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul><a href="cart.html" class="nav-cart">🛒 CART (<span class="cart-badge" style="display:none">0</span>)</a><button class="hamburger"><span></span><span></span><span></span></button></div></nav>
+<div style="padding-top:72px;"></div>
+<div id="post-container" style="max-width:1400px;margin:0 auto;padding:3rem 2rem;"></div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand"><a href="index.html" class="footer-logo">SOLESTORE</a><p>Authentic sneakers. Philadelphia, PA.</p></div>
+    <div class="footer-col"><h4>Shop</h4><ul><li><a href="shop.html">All Shoes</a></li></ul></div>
+    <div class="footer-col"><h4>Info</h4><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Legal</h4><ul><li><a href="privacy-policy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 SoleStore LLC. 1204 Market Street, Philadelphia, PA 19107</p></div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+function loadPost() {
+  const idParam = new URLSearchParams(window.location.search).get('id');
+  const id = isNaN(idParam) ? idParam : parseInt(idParam);
+  const container = document.getElementById('post-container');
+  const post = getAllBlogs().find(b => String(b.id) === String(id));
+
+  if (!post) {
+    container.innerHTML = '<div style="text-align:center;padding:5rem;font-family:Space Mono,monospace"><h2 style="font-family:Bebas Neue,sans-serif;font-size:3rem;letter-spacing:3px">POST NOT FOUND</h2><a href="blog.html" class="btn btn-yellow" style="margin-top:2rem;display:inline-flex">BACK TO BLOG</a></div>';
+    return;
+  }
+  document.getElementById('page-title').textContent = post.title + ' – SoleStore Journal';
+  const others = getAllBlogs().filter(b => String(b.id) !== String(id)).slice(0,4);
+  const sidebarPosts = others.map(b => `
+    <div class="related-post" onclick="window.location='blog-post.html?id=${b.id}'">
+      <img class="related-thumb" src="${b.image||'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=120&q=60'}" alt="${b.title}">
+      <div class="related-info"><a href="blog-post.html?id=${b.id}">${b.title.substring(0,50)}...</a><p>${b.date}</p></div>
+    </div>`).join('');
+
+  container.innerHTML = `
+    <div class="post-layout">
+      <article>
+        <a href="blog.html" class="back-link">← BACK TO JOURNAL</a>
+        <span class="post-cat-tag">${post.category||'Article'}</span>
+        <h1 class="post-title">${post.title}</h1>
+        <div class="post-meta">
+          <span>📅 <strong>${post.date}</strong></span>
+          <span>✍️ <strong>${post.author||'SoleStore Editors'}</strong></span>
+        </div>
+        <img class="post-hero-img" src="${post.image||'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1000&q=75'}" alt="${post.title}">
+        <div class="post-content">${post.content.replace(/\n/g,'<br>')}</div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:var(--border-thick)">
+          <a href="../shop.html" class="btn btn-yellow">SHOP ALL SHOES →</a>
+        </div>
+      </article>
+      <aside class="sidebar">
+        <div class="sw" style="background:var(--yellow)">
+          <h4>🔥 SHOP NOW</h4>
+          <p style="font-family:'Space Mono',monospace;font-size:12px;margin-bottom:1rem">New styles available. COD on all orders.</p>
+          <a href="../shop.html" class="btn btn-black btn-sm">VIEW SHOES →</a>
+        </div>
+        <div class="sw"><h4>MORE FROM THE JOURNAL</h4>${sidebarPosts}</div>
+      </aside>
+    </div>`;
+}
+loadPost();
+</script>
+</body>
+</html>

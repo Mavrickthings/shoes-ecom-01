@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog Admin – SoleStore (PRIVATE)</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="css/style.css">
+<style>
+body { background:var(--black); }
+.admin-wrap { max-width:1100px; margin:0 auto; padding:6rem 2rem 4rem; }
+.admin-header { border:var(--border-thick); background:var(--yellow); padding:2rem; margin-bottom:2rem; box-shadow:var(--shadow-lg); }
+.admin-header h1 { font-family:'Bebas Neue',sans-serif; font-size:3rem; letter-spacing:4px; color:var(--black); }
+.admin-header p { font-family:'Space Mono',monospace; font-size:13px; color:var(--black); margin-top:0.25rem; }
+.private-badge { display:inline-block; background:var(--red); color:var(--white); font-family:'Space Mono',monospace; font-size:11px; font-weight:700; padding:4px 12px; letter-spacing:2px; border:2px solid var(--black); }
+.tip { background:var(--black); border:3px solid var(--yellow); color:var(--yellow); padding:1rem 1.5rem; margin-bottom:2rem; font-family:'Space Mono',monospace; font-size:13px; line-height:1.6; }
+.tip a { color:var(--lime); font-weight:700; }
+.admin-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start; }
+.admin-panel { background:var(--white); border:var(--border-thick); box-shadow:var(--shadow-lg); }
+.panel-header { background:var(--black); padding:1.25rem 1.5rem; border-bottom:var(--border-thick); }
+.panel-header h2 { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; color:var(--yellow); letter-spacing:3px; }
+.panel-body { padding:1.5rem; }
+.img-prev { width:100%; height:180px; background:var(--bg); border:var(--border); display:flex; align-items:center; justify-content:center; margin-bottom:0.5rem; overflow:hidden; }
+.img-prev img { width:100%; height:100%; object-fit:cover; }
+.img-prev span { font-family:'Space Mono',monospace; font-size:12px; color:#666; text-align:center; padding:1rem; }
+.char-ct { text-align:right; font-family:'Space Mono',monospace; font-size:11px; color:#666; margin-top:3px; }
+.pub-btn { background:var(--yellow); color:var(--black); border:var(--border-thick); width:100%; padding:15px; font-family:'Space Mono',monospace; font-size:14px; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer; box-shadow:var(--shadow); transition:all 0.1s; }
+.pub-btn:hover { transform:translate(-3px,-3px); box-shadow:9px 9px 0 var(--black); }
+.ok-msg { display:none; background:var(--lime); border:var(--border-thick); padding:1rem; text-align:center; font-family:'Space Mono',monospace; font-weight:700; font-size:14px; margin-bottom:1rem; box-shadow:var(--shadow-sm); }
+.posts-list { display:flex; flex-direction:column; gap:1rem; }
+.post-row { background:var(--bg); border:var(--border); padding:1rem; display:flex; gap:12px; align-items:flex-start; }
+.pthumb { width:72px; height:72px; object-fit:cover; border:var(--border); flex-shrink:0; }
+.pinfo h4 { font-size:14px; font-weight:700; margin-bottom:3px; }
+.pinfo p { font-family:'Space Mono',monospace; font-size:11px; color:#666; margin-bottom:8px; }
+.pactions { display:flex; gap:8px; flex-wrap:wrap; }
+.btn-view-post { background:var(--black); color:var(--yellow); border:none; padding:6px 12px; font-family:'Space Mono',monospace; font-size:11px; font-weight:700; cursor:pointer; letter-spacing:1px; text-decoration:none; }
+.btn-del-post { background:var(--red); color:var(--white); border:none; padding:6px 12px; font-family:'Space Mono',monospace; font-size:11px; font-weight:700; cursor:pointer; letter-spacing:1px; }
+.empty-posts { text-align:center; padding:3rem; font-family:'Space Mono',monospace; color:#666; }
+.empty-posts span { font-size:3rem; display:block; margin-bottom:0.5rem; }
+
+/* GATE */
+#gate { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:2rem; }
+.gate-box { background:var(--white); border:var(--border-thick); box-shadow:var(--shadow-lg); padding:3rem; max-width:440px; width:100%; text-align:center; }
+.gate-box h2 { font-family:'Bebas Neue',sans-serif; font-size:3rem; letter-spacing:4px; color:var(--black); margin-bottom:0.25rem; }
+.gate-box p { font-family:'Space Mono',monospace; font-size:13px; color:#444; margin-bottom:1.5rem; }
+.gate-err { color:var(--red); font-family:'Space Mono',monospace; font-size:13px; font-weight:700; margin-top:0.75rem; display:none; letter-spacing:1px; }
+#admin-panel { display:none; }
+@media(max-width:768px){ .admin-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<nav style="background:var(--black);border-bottom:3px solid var(--yellow)">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">SOLE<span>STORE</span></a>
+    <ul class="nav-links">
+      <li><a href="blog.html">View Blog</a></li>
+      <li><a href="index.html">Main Site</a></li>
+    </ul>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- GATE -->
+<div id="gate">
+  <div class="gate-box">
+    <div style="font-size:3rem;margin-bottom:1rem">🔐</div>
+    <h2>BLOG ADMIN</h2>
+    <p>This page is not linked from the public website. Enter your admin password to manage blog posts.</p>
+    <div class="form-group"><input type="password" id="admin-pw" placeholder="Enter admin password" style="text-align:center;font-size:1.1rem" onkeydown="if(event.key==='Enter')checkPw()"></div>
+    <button class="pub-btn" onclick="checkPw()">LOGIN →</button>
+    <p class="gate-err" id="pw-err">✕ INCORRECT PASSWORD</p>
+    <p style="font-family:'Space Mono',monospace;font-size:11px;color:#999;margin-top:1.5rem">Default password: <strong>solestore2025</strong><br>Change the ADMIN_PASSWORD variable in this file</p>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="admin-panel">
+<div class="admin-wrap">
+  <div class="admin-header">
+    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:0.5rem">
+      <h1>BLOG MANAGER</h1>
+      <span class="private-badge">PRIVATE — NOT LINKED</span>
+    </div>
+    <p>Bookmark this page: <strong>blog-admin.html</strong> | Posts publish instantly and appear on the blog page alongside the 3 built-in articles.</p>
+  </div>
+  <div class="tip">
+    💡 <strong>IMAGE TIP:</strong> Use direct image URLs from <a href="https://unsplash.com" target="_blank">Unsplash.com</a> (right-click → Copy Image Address) or upload to <a href="https://imgbb.com" target="_blank">imgbb.com</a> and paste the direct link. Preview updates instantly. Best ratio: 16:9 landscape.
+  </div>
+  <div class="admin-grid">
+    <!-- WRITE FORM -->
+    <div class="admin-panel">
+      <div class="panel-header"><h2>✍ WRITE NEW POST</h2></div>
+      <div class="panel-body">
+        <div class="ok-msg" id="ok-msg">✓ POST PUBLISHED! Now live on the blog page.</div>
+        <form id="write-form">
+          <div class="form-group"><label>Post Title *</label><input type="text" id="f-title" placeholder="e.g. Best Basketball Shoes of 2025" required maxlength="120"></div>
+          <div class="form-group"><label>Category</label>
+            <select id="f-cat">
+              <option>Buying Guide</option>
+              <option>Care & Maintenance</option>
+              <option>Trend Report</option>
+              <option>Style</option>
+              <option>Review</option>
+              <option>News</option>
+              <option>General</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Cover Image URL</label>
+            <input type="url" id="f-img" placeholder="https://images.unsplash.com/..." oninput="previewImg(this.value)">
+            <div class="img-prev" id="img-prev"><span>🖼️ Image preview appears here</span></div>
+          </div>
+          <div class="form-group">
+            <label>Short Excerpt (shown on blog cards)</label>
+            <input type="text" id="f-excerpt" placeholder="Brief summary in 1-2 sentences..." maxlength="200" oninput="document.getElementById('ec').textContent=this.value.length">
+            <div class="char-ct"><span id="ec">0</span>/200</div>
+          </div>
+          <div class="form-group">
+            <label>Full Post Content *</label>
+            <textarea id="f-body" rows="12" placeholder="Write the full article here.&#10;&#10;Use blank lines for new paragraphs.&#10;&#10;HTML tags supported: &lt;h2&gt;, &lt;h3&gt;, &lt;strong&gt;, &lt;em&gt;, &lt;ul&gt;&lt;li&gt;, &lt;p&gt;" required style="min-height:200px"></textarea>
+          </div>
+          <div class="form-group"><label>Author Name (optional)</label><input type="text" id="f-author" placeholder="SoleStore Editors"></div>
+          <button type="submit" class="pub-btn">🚀 PUBLISH TO BLOG →</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- MANAGE POSTS -->
+    <div class="admin-panel">
+      <div class="panel-header"><h2>📋 YOUR POSTS <span id="post-ct" style="font-size:1rem;color:rgba(255,255,0,0.6);font-family:'Space Mono',monospace;font-weight:400;letter-spacing:0"></span></h2></div>
+      <div class="panel-body">
+        <div id="posts-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script src="../js/main.js"></script>
+<script>
+const ADMIN_PASSWORD = 'solestore2025'; // ← CHANGE THIS TO YOUR OWN PASSWORD
+
+function checkPw() {
+  if (document.getElementById('admin-pw').value === ADMIN_PASSWORD) {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('admin-panel').style.display = 'block';
+    renderPosts();
+  } else {
+    document.getElementById('pw-err').style.display = 'block';
+  }
+}
+
+function previewImg(url) {
+  const el = document.getElementById('img-prev');
+  el.innerHTML = (url && url.startsWith('http'))
+    ? `<img src="${url}" alt="Preview" onerror="this.parentElement.innerHTML='<span>⚠️ Image failed to load. Check URL.</span>'">`
+    : '<span>🖼️ Image preview appears here</span>';
+}
+
+document.getElementById('write-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  addBlog({
+    title: document.getElementById('f-title').value.trim(),
+    category: document.getElementById('f-cat').value,
+    image: document.getElementById('f-img').value.trim(),
+    excerpt: document.getElementById('f-excerpt').value.trim() || document.getElementById('f-body').value.trim().substring(0,150),
+    content: document.getElementById('f-body').value.trim(),
+    author: document.getElementById('f-author').value.trim() || 'SoleStore Editors'
+  });
+  this.reset();
+  document.getElementById('img-prev').innerHTML = '<span>🖼️ Image preview appears here</span>';
+  document.getElementById('ec').textContent = '0';
+  const ok = document.getElementById('ok-msg');
+  ok.style.display = 'block';
+  setTimeout(() => ok.style.display = 'none', 5000);
+  renderPosts();
+});
+
+function renderPosts() {
+  const blogs = getBlogs();
+  document.getElementById('post-ct').textContent = `(${blogs.length} published)`;
+  const el = document.getElementById('posts-list');
+  if (blogs.length === 0) {
+    el.innerHTML = '<div class="empty-posts"><span>📝</span><p>No posts published yet.<br>Write your first one!</p></div>';
+    return;
+  }
+  el.innerHTML = '<div class="posts-list">' + blogs.map(p => `
+    <div class="post-row">
+      <img class="pthumb" src="${p.image||'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=150&q=60'}" alt="${p.title}" onerror="this.src='https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=150&q=60'">
+      <div class="pinfo" style="flex:1">
+        <h4>${p.title}</h4>
+        <p>${p.category} · ${p.date}</p>
+        <div class="pactions">
+          <a href="blog-post.html?id=${p.id}" target="_blank" class="btn-view-post">👁 VIEW LIVE</a>
+          <button class="btn-del-post" onclick="confirmDel(${p.id})">🗑 DELETE</button>
+        </div>
+      </div>
+    </div>`).join('') + '</div>';
+}
+
+function confirmDel(id) {
+  if (confirm('Permanently delete this post? This cannot be undone.')) {
+    deleteBlog(id); renderPosts();
+  }
+}
+</script>
+</body>
+</html>
